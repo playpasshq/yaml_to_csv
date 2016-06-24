@@ -1,0 +1,8 @@
+---
+en:
+  foo: bar
+  bar: foo
+  attributes:
+    name: Name
+    address: Address
+    empty:
