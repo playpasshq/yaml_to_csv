@@ -1,0 +1,7 @@
+---
+en:
+  foo: bar
+  nested:
+    name: Name
+    nested: Nested
+    stuff: Stuff
