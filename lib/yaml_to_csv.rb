@@ -28,12 +28,13 @@ class YamlToCsv
     csv_arrs.reduce({}) do |hsh, (composite_key, value)|
       keys = split_keys.call(composite_key)
       nested = hsh
-      keys.each do |key|
-        if keys.last == key
-          nested[key] = value
-        else
+      keys.each_with_index do |key, idx|
+        has_nested_keys = (idx + 1) != keys.length
+        if has_nested_keys
           nested[key] ||= {}
           nested = nested[key]
+        else
+          nested[key] = value
         end
       end
       hsh

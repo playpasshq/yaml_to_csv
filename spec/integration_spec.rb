@@ -44,4 +44,17 @@ RSpec.describe 'Integration' do
     CSV
     expect(converter.csv_text_to_yaml_hash(csv)).to eq(YAML.load(yaml))
   end
+
+  it "can handle nested YAML with recurring key names" do
+    yaml = File.read(File.join(__dir__, 'example_nested_recurring_keys.yml'))
+    converter = YamlToCsv.new
+    csv = converter.yaml_text_to_csv_text(yaml)
+    expect(csv.strip).to eq <<-CSV.gsub(/^\s+/, '').strip
+      en.foo,bar
+      en.nested.name,Name
+      en.nested.nested,Nested
+      en.nested.stuff,Stuff
+    CSV
+    expect(converter.csv_text_to_yaml_hash(csv)).to eq(YAML.load(yaml))
+  end
 end
